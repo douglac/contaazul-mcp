@@ -1,0 +1,43 @@
+# Smithery configuration for Conta Azul MCP
+# Schema: https://smithery.ai/docs/build/project-config
+# This is a REMOTE HTTP MCP — server hosted at https://api.mcp.ai/contaazul
+
+name: contaazul-mcp
+displayName: "Conta Azul MCP — ERP financeiro"
+description: >
+  Conecte sua conta Conta Azul ao Claude / Cursor / VS Code via OAuth 2.0.
+  Gerencie clientes e fornecedores, produtos, serviços, vendas, contratos,
+  contas a pagar/receber, parcelas, quitações e NF-e — em linguagem natural.
+  Lê e escreve dados (35 ferramentas sobre a API v2 da Conta Azul).
+
+version: 0.1.0
+license: MIT
+homepage: https://github.com/douglac/contaazul-mcp
+repository: https://github.com/douglac/contaazul-mcp
+
+tags:
+  - conta-azul
+  - erp
+  - finance
+  - accounting
+  - brazil
+  - fintech
+  - nfe
+  - lgpd
+
+# Remote HTTP MCP — não há startCommand local (servidor já está hosted)
+startCommand:
+  type: http
+  url: https://api.mcp.ai/contaazul
+
+# OAuth 2.1 é o caminho primário; clientes sem OAuth recebem uma tool
+# `authenticate` em runtime e o usuário gera JWT em app.mcp.ai/agent-auth.
+auth:
+  type: oauth2
+  resourceMetadataUrl: https://api.mcp.ai/contaazul/.well-known/oauth-protected-resource
+  fallback:
+    type: agent-auth
+    description: >
+      Para clientes sem suporte a OAuth 2.1. O agente expõe uma tool
+      `authenticate(token)`. Usuário gera o JWT em
+      https://app.mcp.ai/agent-auth e cola no chat.

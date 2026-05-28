@@ -1,0 +1,17 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.douglac/contaazul-mcp",
+  "title": "Conta Azul MCP",
+  "description": "Conta Azul ERP MCP — manage people, products, sales, contracts, payables/receivables, settlements and NF-e via OAuth 2.0. Read + write, 35 tools.",
+  "version": "0.1.0",
+  "repository": {
+    "url": "https://github.com/douglac/contaazul-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.mcp.ai/contaazul"
+    }
+  ]
+}
