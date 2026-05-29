@@ -4,7 +4,7 @@ Recursos visuais do projeto.
 
 ## Arquivos atuais
 
-- `logo.svg` — logotipo placeholder (azul `#1A73E8`, que é o brand color do botão "Autorizar com Conta Azul" no seed). **Substituir** pelo logo definitivo antes do launch público nas redes / Smithery / etc.
+- `logo.svg` — logotipo oficial da Conta Azul (wordmark, azul `#2687E9`), de `contaazul.com/logos/ca-logo.svg`. Marca registrada da Conta Azul, usada como ícone de integração. Trocar se a Conta Azul solicitar (ver disclaimer "não afiliado" no README).
 
 ## Pendente (adicionar antes do launch)
 
