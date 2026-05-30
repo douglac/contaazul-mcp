@@ -1,0 +1,45 @@
+{
+  "name": "@mcp.ai/contaazul-mcp",
+  "version": "0.1.0",
+  "description": "Conta Azul ERP MCP — npx launcher for the hosted remote MCP at https://api.mcp.ai/contaazul (bridges stdio-only clients via mcp-remote). 35 tools, OAuth 2.0, read + write.",
+  "type": "module",
+  "bin": {
+    "contaazul-mcp": "index.mjs"
+  },
+  "files": [
+    "index.mjs",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "mcp-remote": "^0.1.38"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "contaazul",
+    "conta-azul",
+    "erp",
+    "accounting",
+    "nfe",
+    "brazil",
+    "finance",
+    "claude",
+    "cursor"
+  ],
+  "license": "MIT",
+  "author": "mcp.ai",
+  "homepage": "https://github.com/douglac/contaazul-mcp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/douglac/contaazul-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/douglac/contaazul-mcp/issues"
+  }
+}
