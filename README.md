@@ -1,5 +1,7 @@
 # Conta Azul MCP
 
+[![MCP Queen operational grade](https://mcpqueen.com/badge/io.github.douglac/contaazul-mcp.svg)](https://mcpqueen.com/s/io.github.douglac/contaazul-mcp)
+
 ### ERP financeiro Conta Azul para Claude, Cursor e agentes de IA
 
 Conecte sua conta **Conta Azul** ao seu agente de IA. Gerencie **clientes e fornecedores, produtos, serviços, vendas, contratos, contas a pagar e receber, parcelas, quitações e NF-e** em **linguagem natural**. Login via OAuth da própria Conta Azul, em 30 segundos — sem digitar token, sem configurar nada.
