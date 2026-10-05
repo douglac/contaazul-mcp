@@ -8,7 +8,7 @@ description: >
   Conecte sua conta Conta Azul ao Claude / Cursor / VS Code via OAuth 2.0.
   Gerencie clientes e fornecedores, produtos, serviços, vendas, contratos,
   contas a pagar/receber, parcelas, quitações e NF-e — em linguagem natural.
-  Lê e escreve dados (35 ferramentas sobre a API v2 da Conta Azul).
+  Lê e escreve dados (52 ferramentas sobre a API v2 da Conta Azul).
 
 version: 0.1.0
 license: MIT

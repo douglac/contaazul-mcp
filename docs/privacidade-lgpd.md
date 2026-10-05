@@ -5,7 +5,7 @@ Conta Azul MCP é um conector que acessa o ERP **Conta Azul** (API v2) via **OAu
 ## Princípios
 
 1. **Consentimento explícito**: você autoriza expressamente cada empresa via OAuth da Conta Azul, e pode revogar a qualquer momento.
-2. **Escopo mínimo**: só acessamos os dados da(s) empresa(s) Conta Azul que você autorizar, e apenas os módulos cobertos pelas 35 ferramentas.
+2. **Escopo mínimo**: só acessamos os dados da(s) empresa(s) Conta Azul que você autorizar, e apenas os módulos cobertos pelas 52 ferramentas.
 3. **Lê e escreve — sob seu comando**: além de consultar, a IA pode criar/alterar/cancelar dados na Conta Azul. Essas escritas só acontecem quando **você pede** ao agente. Recomendamos revisar antes de confirmar.
 4. **Você no controle**: pode desconectar empresas, gerar/revogar tokens, excluir sua conta a qualquer momento.
 

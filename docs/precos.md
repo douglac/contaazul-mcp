@@ -9,7 +9,7 @@ A diferença entre planos é **quantas empresas Conta Azul** você pode conectar
 - **10 requests grátis** (chamadas ao MCP)
 - **Janela**: 24h
 - **Sem cartão de crédito**
-- Lê e escreve (todas as 35 ferramentas)
+- Lê e escreve (todas as 52 ferramentas)
 
 Depois de esgotar o free (ou a janela de 24h), você precisa assinar um plano pra continuar usando.
 

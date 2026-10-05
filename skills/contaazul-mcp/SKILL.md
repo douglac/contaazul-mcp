@@ -1,13 +1,13 @@
 ---
 name: contaazul-mcp
-description: Skill abrangente pra operar o ERP Conta Azul via Conta Azul MCP — vendas, faturamento, contas a pagar/receber, fluxo de caixa, cadastros de pessoas/produtos/serviços, contratos, parcelas/quitações e NF-e. Use sempre que o usuário perguntar ou pedir algo sobre a operação financeira/comercial da empresa dele na Conta Azul (vendas, clientes, fornecedores, produtos, contas, parcelas, notas fiscais). Orquestra as 35 ferramentas contaazul_* (read + write) do servidor MCP remoto em https://api.mcp.ai/contaazul.
+description: Skill abrangente pra operar o ERP Conta Azul via Conta Azul MCP — vendas, faturamento, contas a pagar/receber, fluxo de caixa, cadastros de pessoas/produtos/serviços, contratos, parcelas/quitações e NF-e. Use sempre que o usuário perguntar ou pedir algo sobre a operação financeira/comercial da empresa dele na Conta Azul (vendas, clientes, fornecedores, produtos, contas, parcelas, notas fiscais). Orquestra as 52 ferramentas contaazul_* (read + write) do servidor MCP remoto em https://api.mcp.ai/contaazul.
 ---
 
 # Conta Azul MCP — skill geral
 
 Skill única que cobre todos os casos de uso do Conta Azul MCP. Use sempre que o usuário falar sobre a operação da empresa dele na Conta Azul.
 
-> ⚠️ **Lê E escreve.** Várias tools alteram dados reais na Conta Azul (criar/atualizar/cancelar/excluir/quitar). **Antes de qualquer escrita, mostre ao usuário exatamente o que vai ser feito e peça confirmação.** Operações destrutivas (`contaazul_sale_cancel`, `contaazul_contract_cancel`, `contaazul_person_delete`, `contaazul_unsettle_installment`) exigem confirmação explícita.
+> ⚠️ **Lê E escreve.** Várias tools alteram dados reais na Conta Azul (criar/atualizar/cancelar/excluir/quitar). **Antes de qualquer escrita, mostre ao usuário exatamente o que vai ser feito e peça confirmação.** Operações destrutivas (`contaazul_sale_cancel`, `contaazul_terminate_contract`, `contaazul_delete_contract`, `contaazul_person_delete`, `contaazul_delete_settlement`, `contaazul_cancel_charge`, `contaazul_delete_budgets`) exigem confirmação explícita.
 
 ## Quando ativar
 
@@ -70,7 +70,7 @@ Cacheie o resultado e reaproveite na conversa.
 ### 5. Produtos & serviços
 
 - Listar: `contaazul_list_products` / `contaazul_list_services` (filtro `busca`).
-- Criar produto: `contaazul_product_write_create` (`{"nome":...,"valor_venda":...}`). Atualizar: `contaazul_product_write_update(id, data)`.
+- Criar produto: `contaazul_product_write` (`{"nome":...,"valor_venda":...}`). A API não permite editar produto.
 - Criar serviço: `contaazul_service_write` (`{"nome":...,"valor":...}`).
 
 ### 6. Criar uma venda
@@ -85,15 +85,15 @@ Cacheie o resultado e reaproveite na conversa.
 ### 7. Contratos
 
 - Listar/detalhar: `contaazul_list_contracts`, `contaazul_get_contract`.
-- Criar: `contaazul_contract_write(data)`. Cancelar: `contaazul_contract_cancel(id)` (destrutivo).
+- Criar: `contaazul_contract_write(data)`. Encerrar: `contaazul_terminate_contract`; excluir: `contaazul_delete_contract` (destrutivos).
 
 ### 8. Parcelas & quitação
 
 **Plano**:
-1. `contaazul_list_installments(tipo, status, data_vencimento_inicio, data_vencimento_fim)`.
+1. Ache a parcela via `contaazul_list_receivables` ou `contaazul_list_payables` (filtros de vencimento e status); `contaazul_list_installments(id_evento)` lista as parcelas de um lançamento.
 2. Detalhe: `contaazul_get_installment(id)`.
 3. Quitar: `contaazul_settle_installment(data)` com `{"parcela_id":...,"conta_financeira_id":...,"valor_pago":...,"data_pagamento":"YYYY-MM-DD"}`. Resolva `conta_financeira_id` via `contaazul_list_financial_accounts`. **Confirme valor e conta antes.**
-4. Desfazer: `contaazul_unsettle_installment(id)` (reverte — confirme).
+4. Desfazer: `contaazul_list_settlements` pra achar a baixa, depois `contaazul_delete_settlement` (estorna, confirme).
 
 ### 9. NF-e
 
@@ -107,7 +107,7 @@ Cacheie o resultado e reaproveite na conversa.
 - Use **tabela markdown** pra qualquer agregação. Bullets pra resumo.
 
 ### Antes de escrever (obrigatório)
-- **Sempre confirme** create/update/cancel/delete/settle/unsettle com o usuário antes de chamar a tool.
+- **Sempre confirme** create/update/cancel/delete/settle/estorno com o usuário antes de chamar a tool.
 - Mostre o **payload ou o resumo** do que será criado/alterado.
 - Para `data` (JSON string), monte o objeto explicitamente e valide os campos obrigatórios (ex.: pessoa precisa de nome + cpf|cnpj; venda precisa de cliente_id + itens).
 

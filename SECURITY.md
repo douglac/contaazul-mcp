@@ -20,7 +20,7 @@ O Conta Azul MCP suporta dois fluxos de autenticação. Em **ambos os casos**, o
 ## Boas práticas
 
 - **Não compartilhe** o token. Não cole em chats públicos, issues, e-mails ou pastebins.
-- **Revise antes de confirmar escritas**: peça ao agente pra mostrar o que vai criar/alterar/cancelar/excluir antes de executar. Operações destrutivas (`contaazul_sale_cancel`, `contaazul_contract_cancel`, `contaazul_person_delete`) não têm desfazer fácil.
+- **Revise antes de confirmar escritas**: peça ao agente pra mostrar o que vai criar/alterar/cancelar/excluir antes de executar. Operações destrutivas (`contaazul_sale_cancel`, `contaazul_delete_contract`, `contaazul_person_delete`, `contaazul_delete_settlement`) não têm desfazer fácil.
 - **Prefira OAuth 2.1** sempre que possível: o token nunca passa pelo chat do agente, não vai pro provedor LLM como sub-processador.
 - **No fluxo agent-auth**, lembre que o JWT passa pelo provedor LLM (Anthropic / OpenAI / Cursor / etc.) — ele fica nos logs deles conforme retenção contratada. Mitigue ativando:
   - Claude Pro/Team com "Improve Claude" desligado

@@ -7,7 +7,7 @@ Connect your **Conta Azul** account to your AI agent. Manage **customers and sup
 - 🏢 **Full ERP** — people, products, sales, contracts, finance and NF-e in one place
 - 💬 **Works with any MCP client**: Claude Desktop, Cursor, VS Code, Cline, Continue
 - ✍️ **Read + write** — the AI reads data and also creates/edits records, sales, accounts and settlements (only when you ask)
-- 📊 **35 tools** covering Conta Azul's API v2
+- 📊 **52 tools** covering Conta Azul's API v2
 - 🔑 **Conta Azul OAuth 2.0** — the platform provides the OAuth app, you just click **Authorize**
 - 🛡️ **LGPD-compliant** — explicit consent, minimal retention, you in control
 
@@ -71,7 +71,7 @@ List the NF-e invoices issued in May
 
 ---
 
-## 35 available tools
+## 52 available tools
 
 These cover Conta Azul's API v2, grouped by module. Detail for each in [docs/ferramentas.md](docs/ferramentas.md) (PT-BR).
 
@@ -79,71 +79,103 @@ These cover Conta Azul's API v2, grouped by module. Detail for each in [docs/fer
 
 | Tool | Description |
 |---|---|
-| `contaazul_list_accounts` | List Conta Azul companies linked to this install |
-| `contaazul_get_company` | Active company details (CNPJ, legal name, tax regime) |
+| `contaazul_list_accounts` | Lists the linked Conta Azul companies |
+| `contaazul_get_company` | Active company data (CNPJ, legal name, tax regime) |
 
 ### People (customers / suppliers / sellers / carriers)
 
 | Tool | Description |
 |---|---|
-| `contaazul_list_people` | List people (filters: search, type, active) |
-| `contaazul_get_person` | Person detail by id |
-| `contaazul_person_write_create` | Create a person (name + cpf/cnpj + profiles) |
-| `contaazul_person_write_update` | Update a person by id |
-| `contaazul_person_delete` | Delete a person (destructive) |
+| `contaazul_list_people` | Lists people (filters: search, type, active) |
+| `contaazul_get_person` | Details of one or more people by id |
+| `contaazul_person_write_create` | Creates a person |
+| `contaazul_person_write_update` | Updates a person (only the fields sent) |
+| `contaazul_person_delete` | Removes people (destructive) |
 
 ### Products & services
 
 | Tool | Description |
 |---|---|
-| `contaazul_list_products` | List products |
-| `contaazul_get_product` | Product detail by id |
-| `contaazul_product_write_create` | Create a product (name + sale price) |
-| `contaazul_product_write_update` | Update a product by id |
-| `contaazul_list_services` | List services |
-| `contaazul_service_write` | Create a service |
+| `contaazul_list_products` | Lists products |
+| `contaazul_product_write` | Creates a product |
+| `contaazul_list_services` | Lists services |
+| `contaazul_service_write` | Creates a service |
 
-### Sales
+### Sales & quotes
 
 | Tool | Description |
 |---|---|
-| `contaazul_list_sales` | List sales (filters: date, customer, status) |
-| `contaazul_get_sale` | Sale detail by id |
-| `contaazul_sale_write_create` | Create a sale |
-| `contaazul_sale_write_update` | Update a sale by id |
-| `contaazul_sale_cancel` | Cancel a sale (destructive) |
+| `contaazul_list_sales` | Lists sales (filters: customer, seller, status, category, product, number, dates, free text) |
+| `contaazul_list_sale_items` | Line items (products/services, quantity, value) of up to 50 sales |
+| `contaazul_get_sale` | Details of one or more sales by id |
+| `contaazul_sale_write_create` | Creates a sale |
+| `contaazul_sale_write_update` | Updates a sale |
+| `contaazul_sale_cancel` | Cancels sales (destructive) |
+| `contaazul_list_budgets` | Lists quotes |
+| `contaazul_get_budget` | Details of one or more quotes by id |
+| `contaazul_create_budget` | Creates a quote |
+| `contaazul_delete_budgets` | Deletes quotes (destructive) |
 
 ### Contracts
 
 | Tool | Description |
 |---|---|
-| `contaazul_list_contracts` | List contracts (filters: customer, status) |
-| `contaazul_get_contract` | Contract detail by id |
-| `contaazul_contract_write` | Create a contract |
-| `contaazul_contract_cancel` | Cancel/remove a contract (destructive) |
+| `contaazul_list_contracts` | Lists contracts by period |
+| `contaazul_get_contract` | Details of one or more contracts by id |
+| `contaazul_contract_next_number` | Next available contract number |
+| `contaazul_contract_write` | Creates a contract |
+| `contaazul_terminate_contract` | Terminates contracts |
+| `contaazul_delete_contract` | Removes contracts (destructive) |
 
-### Finance (receivables / payables / installments / settlement)
-
-| Tool | Description |
-|---|---|
-| `contaazul_list_receivables` | List receivables (filters: date, status, customer) |
-| `contaazul_receivable_create` | Create a receivable |
-| `contaazul_list_payables` | List payables (filters: date, status, supplier) |
-| `contaazul_payable_create` | Create a payable |
-| `contaazul_list_installments` | List installments / financial events |
-| `contaazul_get_installment` | Installment detail by id |
-| `contaazul_settle_installment` | Settle an installment |
-| `contaazul_unsettle_installment` | Unsettle by id |
-| `contaazul_list_financial_accounts` | List financial accounts (bank, cash, card) |
-| `contaazul_list_categories` | List financial categories (DRE) |
-| `contaazul_list_cost_centers` | List cost centers |
-
-### NF-e
+### Finance: receivables & payables
 
 | Tool | Description |
 |---|---|
-| `contaazul_list_invoices_nfe` | List issued NF-e invoices (filters: issue date, status) |
-| `contaazul_get_invoice_nfe` | NF-e detail by id |
+| `contaazul_list_receivables` | Lists receivables (filters: due date, status) |
+| `contaazul_receivable_create` | Creates a receivable |
+| `contaazul_list_payables` | Lists payables (filters: due date, status) |
+| `contaazul_payable_create` | Creates a payable |
+| `contaazul_list_changed_events` | Financial events changed in a period (incremental sync) |
+
+### Finance: installments & settlements
+
+| Tool | Description |
+|---|---|
+| `contaazul_list_installments` | Installments of a financial event |
+| `contaazul_get_installment` | Details of one or more installments by id |
+| `contaazul_update_installment` | Updates installment fields |
+| `contaazul_settle_installment` | Records a payment for an installment |
+| `contaazul_list_settlements` | Lists the payments of an installment |
+| `contaazul_get_settlement` | Payment details by id |
+| `contaazul_update_settlement` | Updates a payment |
+| `contaazul_delete_settlement` | Reverses a payment (destructive) |
+
+### Charges
+
+| Tool | Description |
+|---|---|
+| `contaazul_generate_charge` | Generates boleto, Pix or payment link for installments |
+| `contaazul_get_charge` | Details of an issued charge |
+| `contaazul_cancel_charge` | Cancels an issued charge |
+
+### Financial accounts, categories & cost centers
+
+| Tool | Description |
+|---|---|
+| `contaazul_list_financial_accounts` | Lists financial accounts (bank, cash, card) |
+| `contaazul_get_account_balance` | Current balance of a financial account |
+| `contaazul_get_initial_balance` | Initial account balances by period |
+| `contaazul_list_transfers` | Transfers between accounts by period |
+| `contaazul_list_categories` | Lists financial categories (P&L) |
+| `contaazul_list_cost_centers` | Lists cost centers |
+
+### Invoices
+
+| Tool | Description |
+|---|---|
+| `contaazul_list_invoices_nfe` | Lists issued NF-e |
+| `contaazul_get_invoice_nfe` | Details of one or more NF-e by id |
+| `contaazul_list_invoices_nfse` | Lists NFS-e by period |
 
 ---
 
@@ -194,7 +226,7 @@ Full policy: [docs/privacidade-lgpd.md](docs/privacidade-lgpd.md) (PT-BR)
 ## FAQ
 
 **Can the AI change data in my Conta Azul?**
-Yes. Unlike a read-only MCP, Conta Azul MCP has write tools: create/update people, products and services; create/update/cancel sales and contracts; create payables/receivables; settle and unsettle installments. Writes **only happen when you ask** the agent. Destructive operations (cancel sale/contract, delete person) should be reviewed before confirming — the token grants full access to the authorized company.
+Yes. Unlike a read-only MCP, Conta Azul MCP has write tools: create/update people; create products and services; create/update/cancel sales; create, terminate and delete contracts; create payables/receivables; record and reverse installment payments; issue boleto/Pix charges. Writes **only happen when you ask** the agent. Destructive operations (cancel sale or charge, delete person/contract/quote, reverse a payment) should be reviewed before confirming — the token grants full access to the authorized company.
 
 **Do I have to hand over my Conta Azul password?**
 No. The connection uses **Conta Azul's own OAuth 2.0** — you log in on the official Conta Azul site and authorize access. Your password never passes through us.

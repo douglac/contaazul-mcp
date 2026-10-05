@@ -7,7 +7,7 @@ Conecte sua conta **Conta Azul** ao seu agente de IA. Gerencie **clientes e forn
 - 🏢 **ERP completo** — pessoas, produtos, vendas, contratos, financeiro e NF-e em um só lugar
 - 💬 **Funciona com qualquer cliente MCP**: Claude Desktop, Cursor, VS Code, Cline, Continue
 - ✍️ **Lê e escreve** — a IA consulta dados e também cria/edita cadastros, vendas, contas e quitações (sempre quando você pede)
-- 📊 **35 ferramentas** cobrindo a API v2 da Conta Azul
+- 📊 **52 ferramentas** cobrindo a API v2 da Conta Azul
 - 🔑 **OAuth 2.0 da Conta Azul** — a plataforma fornece a aplicação OAuth, você só clica em **Autorizar**
 - 🛡️ **LGPD-compliant** — consentimento explícito, retenção mínima, você no controle
 
@@ -86,7 +86,7 @@ Lista as NF-e emitidas em maio
 
 ---
 
-## 35 ferramentas disponíveis
+## 52 ferramentas disponíveis
 
 Cobrem a API v2 da Conta Azul, organizadas por módulo. Detalhe de cada uma em [docs/ferramentas.md](docs/ferramentas.md).
 
@@ -94,7 +94,7 @@ Cobrem a API v2 da Conta Azul, organizadas por módulo. Detalhe de cada uma em [
 
 | Tool | Descrição |
 |---|---|
-| `contaazul_list_accounts` | Lista as empresas Conta Azul vinculadas a este install |
+| `contaazul_list_accounts` | Lista as empresas Conta Azul vinculadas |
 | `contaazul_get_company` | Dados da empresa ativa (CNPJ, razão social, regime tributário) |
 
 ### Pessoas (clientes / fornecedores / vendedores / transportadores)
@@ -102,63 +102,95 @@ Cobrem a API v2 da Conta Azul, organizadas por módulo. Detalhe de cada uma em [
 | Tool | Descrição |
 |---|---|
 | `contaazul_list_people` | Lista pessoas (filtros: busca, tipo, ativo) |
-| `contaazul_get_person` | Detalhe de uma pessoa por id |
-| `contaazul_person_write_create` | Cria uma pessoa (nome + cpf/cnpj + perfis) |
-| `contaazul_person_write_update` | Atualiza uma pessoa por id |
-| `contaazul_person_delete` | Remove uma pessoa (destrutivo) |
+| `contaazul_get_person` | Detalhe de uma ou mais pessoas por id |
+| `contaazul_person_write_create` | Cria uma pessoa |
+| `contaazul_person_write_update` | Atualiza uma pessoa (só os campos enviados) |
+| `contaazul_person_delete` | Remove pessoas (destrutivo) |
 
 ### Produtos & serviços
 
 | Tool | Descrição |
 |---|---|
 | `contaazul_list_products` | Lista produtos cadastrados |
-| `contaazul_get_product` | Detalhe de produto por id |
-| `contaazul_product_write_create` | Cria um produto (nome + valor_venda) |
-| `contaazul_product_write_update` | Atualiza um produto por id |
+| `contaazul_product_write` | Cria um produto |
 | `contaazul_list_services` | Lista serviços cadastrados |
 | `contaazul_service_write` | Cria um serviço |
 
-### Vendas
+### Vendas & orçamentos
 
 | Tool | Descrição |
 |---|---|
-| `contaazul_list_sales` | Lista vendas (filtros: data, cliente, status) |
-| `contaazul_get_sale` | Detalhe de uma venda por id |
+| `contaazul_list_sales` | Lista vendas (filtros: cliente, vendedor, situação, categoria, produto, número, datas, texto livre) |
+| `contaazul_list_sale_items` | Itens (produtos/serviços, quantidade, valor) de até 50 vendas |
+| `contaazul_get_sale` | Detalhe de uma ou mais vendas por id |
 | `contaazul_sale_write_create` | Cria uma venda |
-| `contaazul_sale_write_update` | Atualiza uma venda por id |
-| `contaazul_sale_cancel` | Cancela uma venda (destrutivo) |
+| `contaazul_sale_write_update` | Atualiza uma venda |
+| `contaazul_sale_cancel` | Cancela vendas (destrutivo) |
+| `contaazul_list_budgets` | Lista orçamentos |
+| `contaazul_get_budget` | Detalhe de um ou mais orçamentos por id |
+| `contaazul_create_budget` | Cria um orçamento |
+| `contaazul_delete_budgets` | Exclui orçamentos (destrutivo) |
 
 ### Contratos
 
 | Tool | Descrição |
 |---|---|
-| `contaazul_list_contracts` | Lista contratos (filtros: cliente, status) |
-| `contaazul_get_contract` | Detalhe de contrato por id |
+| `contaazul_list_contracts` | Lista contratos por período |
+| `contaazul_get_contract` | Detalhe de um ou mais contratos por id |
+| `contaazul_contract_next_number` | Próximo número de contrato disponível |
 | `contaazul_contract_write` | Cria um contrato |
-| `contaazul_contract_cancel` | Cancela/remove um contrato (destrutivo) |
+| `contaazul_terminate_contract` | Encerra contratos |
+| `contaazul_delete_contract` | Remove contratos (destrutivo) |
 
-### Financeiro (contas a receber / pagar / parcelas / quitação)
+### Financeiro: contas a receber e a pagar
 
 | Tool | Descrição |
 |---|---|
-| `contaazul_list_receivables` | Lista contas a receber (filtros: data, status, cliente) |
+| `contaazul_list_receivables` | Lista contas a receber (filtros: vencimento, status) |
 | `contaazul_receivable_create` | Cria uma conta a receber |
-| `contaazul_list_payables` | Lista contas a pagar (filtros: data, status, fornecedor) |
+| `contaazul_list_payables` | Lista contas a pagar (filtros: vencimento, status) |
 | `contaazul_payable_create` | Cria uma conta a pagar |
-| `contaazul_list_installments` | Lista parcelas / eventos financeiros |
-| `contaazul_get_installment` | Detalhe de uma parcela por id |
-| `contaazul_settle_installment` | Quita (settle) uma parcela |
-| `contaazul_unsettle_installment` | Desfaz uma quitação por id |
+| `contaazul_list_changed_events` | Eventos financeiros alterados num período (sync incremental) |
+
+### Financeiro: parcelas e baixas
+
+| Tool | Descrição |
+|---|---|
+| `contaazul_list_installments` | Parcelas de um evento financeiro |
+| `contaazul_get_installment` | Detalhe de uma ou mais parcelas por id |
+| `contaazul_update_installment` | Atualiza campos de uma parcela |
+| `contaazul_settle_installment` | Registra a baixa (recebimento/pagamento) de uma parcela |
+| `contaazul_list_settlements` | Lista as baixas de uma parcela |
+| `contaazul_get_settlement` | Detalhe de uma baixa por id |
+| `contaazul_update_settlement` | Atualiza uma baixa |
+| `contaazul_delete_settlement` | Estorna uma baixa (destrutivo) |
+
+### Cobranças
+
+| Tool | Descrição |
+|---|---|
+| `contaazul_generate_charge` | Gera boleto, Pix ou link de pagamento para parcelas |
+| `contaazul_get_charge` | Detalhe de uma cobrança emitida |
+| `contaazul_cancel_charge` | Cancela uma cobrança emitida |
+
+### Contas financeiras, categorias e centros de custo
+
+| Tool | Descrição |
+|---|---|
 | `contaazul_list_financial_accounts` | Lista contas financeiras (banco, caixa, cartão) |
+| `contaazul_get_account_balance` | Saldo atual de uma conta financeira |
+| `contaazul_get_initial_balance` | Saldos iniciais das contas por período |
+| `contaazul_list_transfers` | Transferências entre contas por período |
 | `contaazul_list_categories` | Lista categorias financeiras (DRE) |
 | `contaazul_list_cost_centers` | Lista centros de custo |
 
-### NF-e
+### Notas fiscais
 
 | Tool | Descrição |
 |---|---|
-| `contaazul_list_invoices_nfe` | Lista NF-e emitidas (filtros: data de emissão, status) |
-| `contaazul_get_invoice_nfe` | Detalhe de uma NF-e por id |
+| `contaazul_list_invoices_nfe` | Lista NF-e emitidas |
+| `contaazul_get_invoice_nfe` | Detalhe de uma ou mais NF-e por id |
+| `contaazul_list_invoices_nfse` | Lista NFS-e por competência |
 
 Documentação detalhada de cada tool: [docs/ferramentas.md](docs/ferramentas.md)
 
@@ -173,7 +205,7 @@ Conta Azul MCP cobre os principais módulos do ERP:
 - **Vendas** — listar, detalhar, criar, atualizar e cancelar vendas
 - **Contratos** — contratos recorrentes (criar, consultar, cancelar)
 - **Contas a receber / pagar** — listar e criar lançamentos financeiros
-- **Parcelas & quitações** — listar parcelas, quitar (settle) e desfazer quitação (unsettle)
+- **Parcelas & quitações** — listar parcelas, registrar baixa e estornar baixa
 - **Contas financeiras** — bancos, caixa, cartões
 - **Categorias (DRE) & centros de custo** — taxonomia financeira pra análises
 - **NF-e** — consulta de notas fiscais eletrônicas emitidas
@@ -223,7 +255,7 @@ cp -r skills/contaazul-mcp ~/.claude/skills/
 
 📁 Conteúdo da skill: [`skills/contaazul-mcp/SKILL.md`](skills/contaazul-mcp/SKILL.md)
 
-Depois é só pedir coisas como "Resume meu fluxo de caixa do mês" ou "Cadastra esse novo cliente" — a skill ativa automaticamente e orquestra as 35 tools do Conta Azul MCP.
+Depois é só pedir coisas como "Resume meu fluxo de caixa do mês" ou "Cadastra esse novo cliente" — a skill ativa automaticamente e orquestra as 52 tools do Conta Azul MCP.
 
 ---
 

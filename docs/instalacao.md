@@ -45,7 +45,7 @@ Exemplos de prompts:
 - "Cadastra o cliente João Silva (CPF 123.456.789-00)"
 - "Quita a parcela que venceu hoje na conta do Itaú"
 
-Veja [ferramentas.md](ferramentas.md) pra lista completa de 35 ferramentas.
+Veja [ferramentas.md](ferramentas.md) pra lista completa de 52 ferramentas.
 
 > ✍️ **Lembre**: o Conta Azul MCP lê **e escreve**. Antes de confirmar uma criação, alteração, cancelamento, exclusão ou quitação, revise o que o agente vai fazer.
 
